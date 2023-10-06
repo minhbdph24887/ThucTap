@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{:: main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+</head>
+
+<body>
+<main th:object="${detailProduct}" class="poly-item-detail">
+    <h1>Chi Tiết Sản Phẩm</h1>
+    <div class="row">
+
+        <!-- Hiện Thị Anh -->
+        <div class="panel panel-primary">
+            <div class="panel-body text-center">
+                <img th:src="@{|/image/*{image}|}" alt=""/>
+            </div>
+        </div>
+
+        <!-- Hiển Thị Thông Tin Sản Phẩm -->
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <ul>
+                    <li th:text="*{nameProduct}"></li>
+                    <li th:text="*{price}"></li>
+                    <li th:text="*{createDate}"></li>
+                    <li th:text="*{category.nameCategory}"></li>
+                </ul>
+            </div>
+
+            <div class="panel-footer text-right">
+                <button class="btn btn-success">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Hàng Cùng Loại</div>
+            <div class="panel-body">
+                <ul>
+                    <li th:each="p:${listProduct}">
+                        <a th:href="@{|/product/detail/${p.idProduct}|}" th:text="${p.nameProduct}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>
