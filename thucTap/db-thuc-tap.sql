@@ -88,9 +88,10 @@ create table UserDetail(
 	Name nvarchar(100) not null,
 	NumberPhone varchar(10) not null,
 	RoleID bigint not null, --ID của Quyen
-	Sex bit not null, --Gioi Tinh
+	Sex bit not null, --Gioi Tinh 1 la Nam, 0 la Nu
 	Birthday date not null, --Ngay Sinh
 	Address nvarchar(200) not null, --Dia Chi
+	Username varchar(255) not null, --Username
 	Password nvarchar(25) not null, --Password
 	Status int not null --Tồn Tại Là 1, Hết Hạn Là 0
 )
