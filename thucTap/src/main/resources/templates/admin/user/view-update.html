@@ -17,15 +17,19 @@
 <body>
 <div class="row">
     <h3>Thêm User Admin</h3>
-    <form th:action="@{/admin/user/add}" th:object="${user}" method="post">
+    <form th:action="@{/admin/user/update}" th:object="${detailAdmin}" method="post">
+        <div class="form-group">
+            <label>ID Của User: </label>
+            <input type="text" class="form-control" name="idUser" th:field="*{idUser}" readonly/>
+        </div>
         <div class="form-group">
             <label>Họ Và Tên: </label>
-            <input type="text" class="form-control" name="nameUser" placeholder="Nhập Họ Và Tên"/>
+            <input type="text" class="form-control" name="nameUser" th:field="*{nameUser}"  placeholder="Nhập Họ Và Tên"/>
         </div>
 
         <div class="form-group">
             <label>Số Điện Thoại: </label>
-            <input type="text" class="form-control" name="numberPhone" placeholder="Nhập Số Điện Thoại"/>
+            <input type="text" class="form-control" name="numberPhone" th:field="*{numberPhone}" placeholder="Nhập Số Điện Thoại"/>
         </div>
 
         <div class="form-group">
@@ -35,57 +39,44 @@
 
         <div class="form-group">
             <label>Giới Tính: </label>
-            <label>
-                <input type="radio" class="radio-inline" name="sex" value="1" th:text="Nam" checked="">
-                <input type="radio" class="radio-inline" name="sex" value="0" th:text="Nữ">
-            </label>
+            <input type="radio" class="radio-inline" name="sex" value="1" th:checked="${detailAdmin.sex == true}">Nam
+            <input type="radio" class="radio-inline" name="sex" value="0" th:checked="${detailAdmin.sex == false}">Nữ
         </div>
 
         <div class="form-group">
             <label>Ngày Sinh: </label>
-            <input type="date" class="form-control" name="birthday"/>
+            <input type="date" class="form-control" th:field="*{birthday}" name="birthday"/>
         </div>
 
         <div class="form-group">
             <label>Địa Chỉ: </label>
-            <input type="text" class="form-control" name="address" placeholder="Nhập Địa Chỉ"/>
+            <input type="text" class="form-control" name="address" th:field="*{address}" placeholder="Nhập Địa Chỉ"/>
         </div>
 
         <div class="form-group">
             <label>UserName: </label>
-            <input type="text" class="form-control" name="username" placeholder="Nhập Tên Người Dùng"/>
+            <input type="text" class="form-control" name="username" th:field="*{username}" placeholder="Nhập Tên Người Dùng"/>
         </div>
 
         <div class="form-group">
             <label>Password: </label>
-            <input type="password" class="form-control" name="passwordAdmin" id="pwd" placeholder="Nhập Mật Khẩu">
-            <input type="checkbox" id="chk"> Hiện Password
+            <input type="text" class="form-control" name="passwordAdmin" th:field="*{passwordAdmin}" id="pwd" placeholder="Nhập Mật Khẩu">
         </div>
 
         <div class="form-group">
             <label>Trạng Thái: </label>
-            <input type="hidden" name="status" value="1"/>Đang Đi Làm
+            <select name="status" class="form-control">
+                <option value="1" th:selected="${detailAdmin.status == 1}">Đang Đi Làm</option>
+                <option value="0" th:selected="${detailAdmin.status == 0}">Đã Nghỉ</option>
+            </select>
         </div>
 
         <div>
             <div class="navbar-right col-sm-1">
-                <button type="submit" class="btn btn-success"><i class="bi bi-floppy-fill"></i></button>
-            </div>
-            <div class="navbar-right col-sm-1">
-                <button type="reset" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy-fill"></i></button>
             </div>
         </div>
     </form>
 </div>
-<script type="text/javascript">
-    window.onload = function () {
-        const pwd = document.getElementById("pwd");
-        const chk = document.getElementById("chk");
-
-        chk.addEventListener('change', function(e){
-            pwd.type = this.checked ? "text" : "password";
-        });
-    };
-</script>
 </body>
 </html>

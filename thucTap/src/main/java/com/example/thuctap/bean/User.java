@@ -38,7 +38,7 @@ public class User{
     private String username;
 
     @Column(name = "Password")
-    private String password;
+    private String passwordAdmin;
 
     @Column(name = "Status")
     private Integer status;

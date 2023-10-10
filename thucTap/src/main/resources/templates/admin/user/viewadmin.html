@@ -45,8 +45,8 @@
             <td th:text="${listAdmin.address}"></td>
             <td th:text="${listAdmin.detailStatus()}"></td>
             <td>
-                <a href="#" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
-                <a href="#" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                <a th:href="@{/admin/user/detail/{id}(id=${listAdmin.idUser})}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
+                <a th:href="@{/admin/user/delete/{id}(id=${listAdmin.idUser})}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
             </td>
         </tr>
         </tbody>

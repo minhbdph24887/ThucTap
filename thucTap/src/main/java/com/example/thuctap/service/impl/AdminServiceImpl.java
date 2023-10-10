@@ -8,9 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
@@ -37,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
                 .address(user.getAddress())
                 .status(1)
                 .username(user.getUsername())
-                .password(user.getPassword())
+                .passwordAdmin(user.getPasswordAdmin())
                 .build();
         return repository.save(user1);
     }
@@ -47,19 +44,20 @@ public class AdminServiceImpl implements AdminService {
         User user1 = repository.findById(user.getIdUser()).orElse(null).builder()
                 .idUser(user.getIdUser())
                 .nameUser(user.getNameUser())
+                .numberPhone(user.getNumberPhone())
                 .role(user.getRole())
                 .sex(user.getSex())
                 .birthday(user.getBirthday())
                 .address(user.getAddress())
                 .status(user.getStatus())
                 .username(user.getUsername())
-                .password(user.getPassword())
+                .passwordAdmin(user.getPasswordAdmin())
                 .build();
         return repository.save(user1);
     }
 
     @Override
-    public User deleteAdmin(Long idUser) {
-        return repository.deleteUser(idUser);
+    public void deleteAdmin(Long idUser) {
+        repository.deleteUser(idUser);
     }
 }
