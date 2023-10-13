@@ -29,4 +29,12 @@ public class Role {
     @JsonIgnore
     @OneToMany(mappedBy = "role")
     List<User> users;
+
+    public String getStatusRole() {
+        if (this.status == 1) {
+            return "Đang Hoạt Động";
+        } else {
+            return "Ngừng Hoạt Động";
+        }
+    }
 }

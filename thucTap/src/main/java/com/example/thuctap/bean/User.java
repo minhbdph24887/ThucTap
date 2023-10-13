@@ -1,9 +1,11 @@
 package com.example.thuctap.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +15,7 @@ import java.sql.Date;
 @Builder
 @Entity
 @Table(name = "UserDetail")
-public class User{
+public class User {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,11 +49,23 @@ public class User{
     @JoinColumn(name = "RoleID")
     private Role role;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    List<Bill> bills;
+
     public String detailStatus() {
         if (this.status == 1) {
             return "Đang Làm Việc";
         } else {
             return "Đã Nghỉ";
+        }
+    }
+
+    public String detailStatusClient() {
+        if (this.status == 1) {
+            return "Đang Hoạt Động";
+        } else {
+            return "Ngừng Hoạt Động";
         }
     }
 }

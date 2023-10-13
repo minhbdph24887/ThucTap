@@ -7,7 +7,7 @@ create table Promotions(
 	ID bigint identity(1, 1) primary key,
 	Code varchar(50) not null, --Ma Khuyen Mai
 	Name nvarchar(100) not null,
-	Persen int not null, --Phan Tram Giam
+	Persen decimal(20, 3) not null, --Phan Tram Giam
 	Quantity int not null,
 	StartDate date not null, --Ngay Bat Dau
 	EndDate date not null, --Ngay Ket Thuc
@@ -31,19 +31,10 @@ create table ProductItems(
 	ProductID bigint not null, --ID của San Pham
 	ColorID bigint not null, --ID của Mau Sac
 	SizeID bigint not null, --ID của Size
+	Images nvarchar(50) not null, -- Anh San Pham
 	AvaiableQuantity int not null, --So Luong Ton
 	PurchasePrice decimal(20, 0) not null, --Gia Mua Vao
 	CostPrice decimal(20, 0) not null, --Gia Ban
-	Status int not null --Tồn Tại Là 1, Hết Hạn Là 0
-)
-go
-
--- Bang Anh San Pham
-create table Image(
-	ID bigint identity(1, 1) not null,
-	Name nvarchar(100) not null,
-	PathImage nvarchar(50) not null, --Duong Dan Anh
-	ProductID bigint not null, --ID của Chi Tiet San Pham
 	Status int not null --Tồn Tại Là 1, Hết Hạn Là 0
 )
 go
@@ -155,10 +146,6 @@ go
 
 -- Bang Khuyen Mai San Pham Noi Voi Bang Chi Tiet San Pham
 alter table PromotionsProduct add foreign key (ProductID) references ProductItems(ID)
-go
-
--- Bang Chi Tiet San Pham Noi Voi Bang Anh San Pham
-alter table Image add foreign key (ProductID) references ProductItems(ID)
 go
 
 -- Bang Chi Tiet San Pham Noi Voi Bang San Pham

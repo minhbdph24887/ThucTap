@@ -16,76 +16,110 @@
 </head>
 <body>
 <div class="row">
-    <h3>Thêm User Admin</h3>
+    <h3>Thêm Người Quản Trị</h3>
     <form th:action="@{/admin/user/add}" th:object="${user}" method="post">
-        <div class="form-group">
-            <label>Họ Và Tên: </label>
-            <input type="text" class="form-control" name="nameUser" placeholder="Nhập Họ Và Tên"/>
-        </div>
-
-        <div class="form-group">
-            <label>Số Điện Thoại: </label>
-            <input type="text" class="form-control" name="numberPhone" placeholder="Nhập Số Điện Thoại"/>
-        </div>
-
-        <div class="form-group">
-            <label>Chức Vụ: </label>
-            <input type="hidden" name="role.idRole" value="1"/>Quản Trị Viên
-        </div>
-
-        <div class="form-group">
-            <label>Giới Tính: </label>
-            <label>
-                <input type="radio" class="radio-inline" name="sex" value="1" th:text="Nam" checked="">
-                <input type="radio" class="radio-inline" name="sex" value="0" th:text="Nữ">
-            </label>
-        </div>
-
-        <div class="form-group">
-            <label>Ngày Sinh: </label>
-            <input type="date" class="form-control" name="birthday"/>
-        </div>
-
-        <div class="form-group">
-            <label>Địa Chỉ: </label>
-            <input type="text" class="form-control" name="address" placeholder="Nhập Địa Chỉ"/>
-        </div>
-
-        <div class="form-group">
-            <label>UserName: </label>
-            <input type="text" class="form-control" name="username" placeholder="Nhập Tên Người Dùng"/>
-        </div>
-
-        <div class="form-group">
-            <label>Password: </label>
-            <input type="password" class="form-control" name="passwordAdmin" id="pwd" placeholder="Nhập Mật Khẩu">
-            <input type="checkbox" id="chk"> Hiện Password
-        </div>
-
-        <div class="form-group">
-            <label>Trạng Thái: </label>
-            <input type="hidden" name="status" value="1"/>Đang Đi Làm
-        </div>
-
-        <div>
-            <div class="navbar-right col-sm-1">
-                <button type="submit" class="btn btn-success"><i class="bi bi-floppy-fill"></i></button>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Họ Và Tên: </label>
+                        <input type="text" class="form-control" name="nameUser" placeholder="Nhập Họ Và Tên"/>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Số Điện Thoại: </label>
+                        <input type="text" class="form-control" name="numberPhone" placeholder="Nhập Số Điện Thoại"/>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Chức Vụ: </label>
+                        <input type="text" class="form-control" value="Quản Trị Viên" readonly/>
+                        <input type="hidden" name="role.idRole" value="1"/>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Giới Tính: </label>
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <label>
+                                    <input type="radio" name="sex" value="1" th:text="Nam" checked="">
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>
+                                    <input type="radio" name="sex" value="0" th:text="Nữ">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Trạng Thái: </label>
+                        <input type="text" class="form-control" value="Đang Đi Làm" readonly/>
+                        <input type="hidden" name="status" value="1"/>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-right col-sm-1">
-                <button type="reset" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Ngày Sinh: </label>
+                        <input type="date" class="form-control" name="birthday"/>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Địa Chỉ: </label>
+                        <input type="text" class="form-control" name="address" placeholder="Nhập Địa Chỉ"/>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>UserName: </label>
+                        <input type="text" class="form-control" name="username" placeholder="Nhập Tên Người Dùng"/>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <label>Password: </label>
+                    <div class="col-sm-12">
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" name="passwordAdmin" id="pwd"
+                                   placeholder="Nhập Mật Khẩu">
+                        </div>
+                        <div class="col-sm-5">
+                            <label for="chk">
+                                <input type="checkbox" id="chk"> Show Password
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-floppy-fill"></i>
+                        Lưu Lại
+                    </button>
+                </div>
+                <div class="col-sm-1">
+                    <button type="reset" class="btn btn-primary">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        Làm Mới
+                    </button>
+                </div>
             </div>
         </div>
     </form>
 </div>
-<script type="text/javascript">
-    window.onload = function () {
-        const pwd = document.getElementById("pwd");
-        const chk = document.getElementById("chk");
-
-        chk.addEventListener('change', function(e){
-            pwd.type = this.checked ? "text" : "password";
-        });
-    };
-</script>
 </body>
 </html>

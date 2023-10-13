@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // truy van danh sach Khach Hang
     @Query(value = "select * from UserDetail where RoleID = 2", nativeQuery = true)
-    List<User> getAllClient();
+    Page<User> getAllClient(Pageable pageable);
 
     // update trạng thái của Admin
     @Modifying

@@ -16,18 +16,21 @@
 </head>
 <body>
 <div class="row">
-    <h1>Quản Lý User</h1>
+    <h1>Quản Lý Người Quản Trị</h1>
     <div class="navbar-nav">
-        <h3>Danh Sách User</h3>
+        <h3>Danh Sách Người Quản Trị</h3>
     </div>
     <div class="navbar-right">
-        <a th:href="@{/admin/user/view-add}" class="btn btn-info"><i class="bi bi-person-fill-add"></i></a>
+        <a th:href="@{/admin/user/view-add}" class="btn btn-info">
+            <i class="bi bi-person-fill-add"></i>
+            Thêm Ngiời Quản Trị
+        </a>
     </div>
     <br>
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>STT</th>
             <th>Họ Và Tên</th>
             <th>Giới Tính</th>
             <th>Ngày Sinh</th>
@@ -37,23 +40,26 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="listAdmin : ${listAdmin}">
-            <td th:text="${listAdmin.idUser}"></td>
+        <tr th:each="listAdmin, stat : ${listAdmin}">
+            <td th:text="${stat.count}"></td>
             <td th:text="${listAdmin.nameUser}"></td>
             <td th:text="${listAdmin.sex ? 'Nam' : 'Nữ'}"></td>
-            <td th:text="${listAdmin.birthday}"></td>
+            <td th:text="${#dates.format(listAdmin.birthday, 'dd-MM-yyyy')}"></td>
             <td th:text="${listAdmin.address}"></td>
             <td th:text="${listAdmin.detailStatus()}"></td>
             <td>
-                <a th:href="@{/admin/user/detail/{id}(id=${listAdmin.idUser})}" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>
-                <a th:href="@{/admin/user/delete/{id}(id=${listAdmin.idUser})}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                <a th:href="@{/admin/user/detail/{id}(id=${listAdmin.idUser})}" class="btn btn-primary"><i
+                        class="bi bi-eye-fill"></i></a>
+                <a th:href="@{/admin/user/delete/{id}(id=${listAdmin.idUser})}" class="btn btn-danger"><i
+                        class="bi bi-trash-fill"></i></a>
             </td>
         </tr>
         </tbody>
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center pagination-sm">
-            <li th:each="i : ${#numbers.sequence(0, listAdmin.totalPages - 1)}" th:class="${i == page ? 'active' : ''}" class="page-item">
+            <li th:each="i : ${#numbers.sequence(0, listAdmin.totalPages - 1)}" th:class="${i == page ? 'active' : ''}"
+                class="page-item">
                 <a th:href="@{/admin/user(page=${i})}" class="page-link" th:text="${i + 1}"></a>
             </li>
         </ul>
