@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -321,9 +323,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/productitems/update", method = RequestMethod.POST)
-    public String updateProductItems(ProductItems productItems) {
-        adminService.updateProductItems(productItems);
-        return "redirect:/admin/productitems";
+    public String updateProductItems(@RequestParam("file") MultipartFile file, ProductItems productItems) {
+        try {
+            adminService.updateProductItems(productItems, file);
+            return "redirect:/admin/productitems";
+        } catch (IOException e) {
+            // Xử lý ngoại lệ ở đây
+            return "error";
+        }
     }
 
     @RequestMapping(value = "/admin/productitems/delete/{idProductItems}", method = RequestMethod.GET)

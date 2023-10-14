@@ -3,7 +3,9 @@ package com.example.thuctap.service;
 import com.example.thuctap.bean.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface AdminService {
@@ -76,11 +78,13 @@ public interface AdminService {
 
     List<ProductItems> cbbProductItems();
 
+    Page<ProductItems> getProductsByCategory(Pageable pageable, Long categoryId);
+
     ProductItems detailProductItems(Long idProductItems);
 
     ProductItems addProductItems(ProductItems productItems);
 
-    ProductItems updateProductItems(ProductItems productItems);
+    ProductItems updateProductItems(ProductItems productItems, MultipartFile file) throws IOException;
 
     void deleteProductItems(Long idProductItems);
 

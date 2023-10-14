@@ -15,6 +15,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "select * from Products where Status= 1", nativeQuery = true)
     List<Product> cbbProduct();
+
     @Modifying
     @Transactional
     @Query(value = "update Products set Status= 0 where ID= :idProduct", nativeQuery = true)

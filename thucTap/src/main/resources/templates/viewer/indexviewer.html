@@ -47,7 +47,9 @@
 
                 <!-- Hiện Thị Chức Năng -->
                 <div class="panel-footer text-right">
-                    <b class="pull-left">[[${listProduct.costPrice}]] VND</b>
+                    <b class="pull-left">
+                        [[${#numbers.formatDecimal(listProduct.costPrice, 0, 'COMMA', 0, 'POINT')}]] VND
+                    </b>
                     <button th:attr="ng-click=@{|cart.add(${listProduct.idProductItems})|}" class="btn btn-success">
                         <i class="glyphicon glyphicon-shopping-cart"></i>
                     </button>

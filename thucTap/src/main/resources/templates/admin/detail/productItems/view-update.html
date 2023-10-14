@@ -17,7 +17,8 @@
 <body>
 <div class="row">
     <h3>Cập Nhật Chi Tiết Sản Phẩm</h3>
-    <form th:action="@{/admin/productitems/update}" th:object="${detailProductItems}" method="post">
+    <form th:action="@{/admin/productitems/update}" th:object="${detailProductItems}" method="post"
+          enctype="multipart/form-data">
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="col-sm-2">
@@ -103,8 +104,7 @@
                         <label>Ảnh Sản Phẩm: </label>
                         <div class="col-sm-12">
                             <div class="col-sm-7">
-                                <input type="file" id="imageInput" class="form-control" name="imagesProduct"
-                                       th:field="*{imagesProduct}" accept="image/*"/>
+                                <input type="file" id="imageInput" class="form-control" name="file" accept="image/*"/>
                             </div>
                             <div class="col-sm-5">
                                 <img id="previewImage" style="width: 200px; height: 200px;"

@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -271,6 +274,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Page<ProductItems> getProductsByCategory(Pageable pageable, Long categoryId) {
+        return productItemsRepository.findProductItemsByCategory(pageable, categoryId);
+    }
+
+    @Override
     public ProductItems detailProductItems(Long idProductItems) {
         return productItemsRepository.findById(idProductItems).orElse(null);
     }
@@ -291,19 +299,34 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public ProductItems updateProductItems(ProductItems productItems) {
-        ProductItems productItems1 = productItemsRepository.findById(productItems.getIdProductItems()).orElse(null).builder()
+    public ProductItems updateProductItems(ProductItems productItems, MultipartFile file) throws IOException {
+        // Lấy đường dẫn của ảnh cũ từ cơ sở dữ liệu
+        String oldImagePath = productItemsRepository.findById(productItems.getIdProductItems()).get().getImagesProduct();
+        // Kiểm tra xem file có rỗng hay không
+        if (file.isEmpty()) {
+            // Nếu rỗng, sử dụng đường dẫn của ảnh cũ
+            productItems.setImagesProduct(oldImagePath);
+        } else {
+            // Nếu không rỗng, lấy đường dẫn của ảnh mới và lưu vào thư mục images
+            String fileName = file.getOriginalFilename();
+            String imagePath = "images/" + fileName;
+            file.transferTo(new File(imagePath));
+            // Sử dụng đường dẫn của ảnh mới
+            productItems.setImagesProduct(imagePath);
+        }
+        // Cập nhật lại thông tin sản phẩm vào cơ sở dữ liệu
+        ProductItems updatedProductItems = productItemsRepository.findById(productItems.getIdProductItems()).orElse(null).builder()
                 .idProductItems(productItems.getIdProductItems())
                 .product(productItems.getProduct())
                 .color(productItems.getColor())
                 .size(productItems.getSize())
-                .imagesProduct(productItems.getImagesProduct())
+                .imagesProduct(productItems.getImagesProduct()) // Đường dẫn hình ảnh đã được cập nhật
                 .availableQuantity(productItems.getAvailableQuantity())
                 .purchasePrice(productItems.getPurchasePrice())
                 .costPrice(productItems.getCostPrice())
                 .status(productItems.getStatus())
                 .build();
-        return productItemsRepository.save(productItems1);
+        return productItemsRepository.save(updatedProductItems);
     }
 
     @Override
